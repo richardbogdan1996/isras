@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Главная - ИС РАС</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+
+  <!-- RICHARD STYLE -->
+  <link href="{% static 'css/my_style.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/css.css' %}" rel="stylesheet">
+  <link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/select2-bootstrap-5-theme.min.css' %}" rel="stylesheet">
+
+
+
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex flex-column justify-content-center">
+
+    <i class="header-toggle d-xl-none bi bi-list"></i>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="{% url 'home' %}" class="active"><i class="bi bi-house navicon"></i><span>Главная</span></a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' %}" class="nav-link scrollto"><i class="bi bi-person"></i> <span>Личный кабинет</span></a></li>
+
+
+        <li>
+
+          <form action="{% url 'logout' %}" method="POST" id="logout-form">
+            {% csrf_token %}
+          </form>
+
+          <a href="#" class="nav-link scrollto d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#logoutModal">
+            <i class="bi bi-box-arrow-left"></i>
+            <span class>Выйти</span>
+          </a>
+
+        </li>
+        {% else %}
+        <li><a href="{% url 'login' %}" class="nav-link scrollto"><i class="bi bi-box-arrow-in-right"></i> <span>Войти</span></a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+
+  </header>
+
+  <main class="main">
+    {% block content %}
+
+  {% endblock %}
+  </main>
+
+
+  {% block footer %}
+
+
+
+
+  {% endblock %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+
+
+
+  <!-- Modal -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="logoutModalLabel">Выход из личного кабинета</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                  Вы действительно хотите выйти из личного кабинета?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                  <button type="submit" class="btn btn-primary" form="logout-form">Выйти</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/typed.js/typed.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/select2.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.umd.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/multistep.validate.form.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/multistep.form.js' %}"></script>
+
+
+
+
+  <!-- Отключение закрытия модального окна по свободному месту -->
+
+  <script>
+  const logoutModal = document.getElementById('logoutModal');
+  const logoutModalContent = logoutModal.querySelector('.modal-content');
+
+  logoutModal.addEventListener('click', function(event) {
+    if (event.target !== logoutModalContent && event.target !== logoutModal) {
+      event.stopPropagation(); // Предотвращаем распространение события
+    }
+  });
+  </script>
+
+
+  <!-- Инициализация Select-2 -->
+  <script>
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2({
+        dropdownParent: $('#reg_child .modal-body')
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#medical_card_child_medical_institution_id').select2({
+        theme: 'bootstrap-5',
+        width: '100%',
+        placeholder: 'Выберите из списка'
+      });
+    });
+  </script>
+
+
+
+  <!-- Сustom input type date -->
+  <script>
+  const dateInput = document.getElementById('medical_card_child_birthday_date');
+
+  dateInput.addEventListener('click', () => {
+    dateInput.showPicker();
+  });
+  </script>
+  <script>
+
+    const childBirthdayInput = document.getElementById('child_birthday_date');
+
+    function calculateDateRange() {
+    const today = new Date();
+    const minDate = new Date(today.getFullYear(), today.getMonth() - 36, today.getDate());
+    const maxDate = new Date(today.getFullYear(), today.getMonth() - 18, today.getDate());
+
+    childBirthdayInput.min = minDate.toISOString().split('T')[0];
+    childBirthdayInput.max = maxDate.toISOString().split('T')[0];
+
+    childBirthdayInput.addEventListener('input', function() {
+    const selectedDate = new Date(this.value);
+    const monthsDifference = (today.getFullYear() * 12 + today.getMonth()) - (selectedDate.getFullYear() * 12 + selectedDate.getMonth());
+
+    if (monthsDifference < 18 || monthsDifference > 36) {
+      this.setCustomValidity('Дата рождения ребенка должна быть от 18 до 36 месяцев');
+    } else {
+      this.setCustomValidity('');
+    }});}
+
+    window.addEventListener('DOMContentLoaded', calculateDateRange);
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% load django_tables2 %}
+
+{% block content %}
+
+<section class="profile" id="profile" style="padding: 35px 0; !important">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+            <div class="container-fluid">
+                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false" aria-label="Toggle navigation" style="padding:0px;">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Профиль</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="{% url 'childs' %}">Дети</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'tests' %}">Результы тестов</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" aria-expanded="false">Отчеты</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" href="#">Отчет-1</a></li>
+                                <li><a class="dropdown-item" href="#">Отчет-2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" aria-expanded="false">Справочники</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" href="#">Oбщестатистический код предприятий и организаций (ОКПО)</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if request.user.is_superuser and request.user.is_staff %}
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">Администрирование</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Логи</a></li>
+                                <li><a class="dropdown-item" href="#">Пользователи</a></li>
+                                <li><a class="dropdown-item" href="#">Дети</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" aria-expanded="false">{{user.email}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                <li><a class="dropdown-item" href="{% url 'settings' %}">Настройки</a></li>
+                                <li><a class="dropdown-item" href="#">Помощь</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Выход</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="" id="content">
+                <h5 class="card-title mt-4 mb-4">Настройки</h5>
+                <div class="mt-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="mb-0">Электронная почта</p>
+                            <div class="mt-2">
+                                <input type="text" class="form-control" id="inputFirstName" value="{{user.email}}" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

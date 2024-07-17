@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ИС РАС - Вход</title>
+	<link href="/static/css/all.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+	<link href="/static/css/mdb.min.css" rel="stylesheet">
+	<link href="/static/css/my_form_style.css" rel="stylesheet">
+
+</head>
+
+<body>
+   <div class="d-flex align-items-center justify-content-center vh-100">
+	   <div class="card shadow-2-strong card-desktop" style="">
+		   <div class="card-body text-center d-flex flex-column justify-content-center" style="height: 100%;">
+			   <div class="mb-4" id="logo">
+				   <img src="https://rnpcmt.by/files/00106/img/logo_ru.gif" alt="" height="90" width="90">
+			   </div>
+			   <h3 class="mb-5">Регистрация в ИС РАС</h3>
+			   {% if messages %}
+			   {% for message in messages %}
+			   {% if message.tags == 'error' %}
+			   <div class="alert alert-danger mb-4">{{ message }}</div>
+			   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div class="toast  fade show" role="alert" aria-live="assertive" aria-atomic="true" id="toast-{{ forloop.counter }}">
+                    <div class="toast-header toast-danger">
+                        <strong class="me-auto">Ошибка</strong>
+                        <small>только что</small>
+                        <button type="button" class="btn-close" data-mdb-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body toast-danger" style="text-align: justify;">
+                        Создайте надёжный пароль, состоящий из не менее 8 знаков, включая цифры, специальные символы, заглавные и строчные буквы
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                 var toastLiveExample = document.getElementById('toast-{{ forloop.counter }}');
+                 if (toastLiveExample) {var toast = new mdb.Toast(toastLiveExample, {
+                 stacking: true,
+                 autohide: true,
+                 delay: 12000
+                 });
+                 toast.show();
+                 }
+                 });
+            </script>
+
+			   {% elif message.tags == 'success' %}
+			   <div class="alert alert-success mb-4">{{ message }}</div>
+			   {% endif %}
+			   {% endfor %}
+			   {% endif %}
+
+			   <form action="{% url 'register' %}" method="POST" class="w-auto">
+				   {% csrf_token %}
+
+
+				   <div data-mdb-input-init class="form-outline mb-4">
+					   <input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" aria-describedby="id_username_helptext" id="id_username">
+					   <label class="form-label" for="id_username">Логин</label>
+				   </div>
+
+				   <div data-mdb-input-init class="form-outline mb-4">
+					   <input class="form-control" type="email" name="email" autocomplete="email" maxlength="254" required="" id="id_email">
+					   <label class="form-label" for="id_email">Электронная&nbspпочта</label>
+				   </div>
+
+
+				   <div data-mdb-input-init class="form-outline mb-4">
+					   <div class="form-outline" data-mdb-input-init>
+						    <input class="form-control" type="password" name="password1" autocomplete="new-password" required="" aria-describedby="id_password1_helptext" id="id_password1">
+						   <label class="form-label" for="id_password1">Пароль</label>
+					   </div>
+					   <div id="id_password1_helptext" class="form-text" style="text-align: justify;">
+
+					   </div>
+				   </div>
+
+
+
+
+				   <div data-mdb-input-init class="form-outline mb-4">
+					   <input class="form-control" type="password" name="password2" autocomplete="new-password" required="" aria-describedby="id_password2_helptext" id="id_password2">
+					   <label class="form-label" for="id_password2">Повторить пароль</label>
+				   </div>
+
+				   <div data-mdb-input-init class="form-outline mb-4" >
+					   <input class="form-control" type="text" name="user_code" maxlength="30" required="" id="id_user_code" value={{user_code}} readonly>
+					   <label class="form-label" for="id_user_code">user_code</label>
+				   </div>
+
+				   <div data-mdb-input-init class="form-outline mb-4" hidden="">
+					   <input class="form-control" type="text" name="is_role" maxlength="30" required="" id="id_is_role" value="5" readonly >
+					   <label class="form-label" for="id_is_role">is_role</label>
+				   </div>
+
+
+				   <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
+
+
+			   </form>
+		   </div>
+	   </div>
+   </div>
+
+
+
+
+<script src="/static/js/mdb.min.js"></script>
+
+
+</body>
+</html>

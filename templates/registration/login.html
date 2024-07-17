@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИС РАС - Регистрация</title>
+  <link href="/static/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+  <link href="/static/css/mdb.min.css" rel="stylesheet">
+  <link href="/static/css/my_form_style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-2-strong card-desktop" style="">
+    <div class="card-body text-center d-flex flex-column justify-content-center" style="height: 100%;">
+      <div class="mb-4" id="logo">
+        <a href="{% url 'home' %}">
+          <img src="/static/assets/img/logo/logo.gif" alt="" height="90" width="90">
+        </a>
+      </div>
+      <h3 class="mb-5">Вход в ИС РАС</h3>
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger mb-4">{{ message }}</div>
+      {% elif message.tags == 'success' %}
+      <div class="alert alert-success mb-4">{{ message }}</div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      <form action="{% url 'auth' %}" method="POST" class="w-auto">
+        {% csrf_token %}
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="text" name="username" id="form2Example1" class="form-control" required />
+          <label class="form-label" for="form2Example1">Логин</label>
+        </div>
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input type="password" name="password" id="form2Example2" class="form-control" required />
+          <label class="form-label" for="form2Example2">Пароль</label>
+        </div>
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+              <label class="form-check-label" for="form2Example31"> Запомнить&nbspменя </label>
+            </div>
+          </div>
+          <div class="col">
+            <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+          </div>
+        </div>
+        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Войти</button>
+        <div class="text-center">
+          <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/mdb.min.js"></script>
+
+</body>
+</html>

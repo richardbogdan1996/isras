@@ -1,0 +1,25 @@
+body {background: linear-gradient(to right, #2c3e50, #4ca1af);}
+
+
+.card-desktop {width: 450px;height: auto;}
+.card-body {padding: 2rem;height: auto;}
+.mb-4 {margin-bottom: 1.5rem !important;}
+
+@media (min-width: 768px) {
+.card-desktop {width: 450px; height:650px; border-radius: 1rem; }
+.card-body {height: 550px;}
+}
+
+/* Медиа-запрос для мобильного разрешения */
+@media (max-width: 767px) {
+.card-desktop {
+width: 100%;
+height: 100%;
+div#logo.mb-4 {display:none;}
+border-radius: 0px;
+}
+
+.card-body {
+height: auto;
+}
+}

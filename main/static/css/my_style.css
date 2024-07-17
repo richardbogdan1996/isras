@@ -1,0 +1,109 @@
+/* FORM TEST STYLE
+# MODAL STYLE
+# CONTENT PROFILE STYLE
+# TABLE STYLE
+# NAVBAR LEFT
+# NAVBAR PROFILE
+# MOBILE STYLE */
+
+
+
+
+
+/* FORM TEST STYLE  */
+.pagination {display: flex; list-style-type: none; padding: 0; margin-top: 20px; font-size: 0.9rem; /* Уменьшаем размер шрифта */ }
+.pagination li { margin: 0 3px; }
+.pagination li a { display: block; padding: 6px 12px; text-decoration: none; color: #333; background-color: #f2f2f2; border-radius: 4px; transition: background-color 0.3s ease;}
+.pagination li.active a {color: #fff; background-color: #007bff;}
+.pagination li a:hover {background-color: #e6e6e6;}
+.pagination li.next a {font-weight: bold;}
+.table-container {overflow-y: auto; position: relative;}
+.step { display: none;}
+.active { display: block;}
+.invalid { border: 1px solid #ffaba5;}
+.progress { margin-bottom: 20px;}
+.invalid {border: 1px solid #FF0000 !important;}
+.form-check {display: flex !important; align-items: start !important; margin-bottom: 10px !important;}
+.form-check-input {margin-right: 10px !important;margin-top: 3px !important; /* Добавляем немного отступа сверху для выравнивания */}
+.form-check-label {flex: 1 !important; /* Позволяет метке занимать все доступное пространство */}
+
+
+
+
+
+/* MODAL STYLE */
+
+.select2-container {}
+.select2-container--default .select2-results__option--disabled {display:none !important;}
+.select2 {line-height: 1.6 !important;}
+
+
+
+
+
+
+/* CONTENT PROFILE STYLE */
+div#content{padding:8px;}
+
+
+
+
+/* TABLE STYLE */
+.table td {text-align: center !important; }
+table#result-test-table.table.table-bordered.table-sm {text-align: center !important;vertical-align: middle !important;}
+th {text-align: center !important;vertical-align: middle !important;}
+
+td a {color : black !important;}
+td a:visited {color: blue !important;}
+td a:hover {color: blue !important;}
+
+
+
+/* NAVBAR LEFT */
+nav#navbar.navbar.nav-menu {box-shadow:none !important;}
+
+
+
+/* NAVBAR PROFILE */
+.navbar {box-shadow:none !important;}
+.bg-body-tertiary { background-color: transparent !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* MOBILE STYLE */
+
+@media (max-width: 768px) {
+div.container-fluid: {padding 0px 12px !important;}
+div#content{padding: 0px;}
+}
+
+
+
+
+.form-outline .form-text {
+  text-align: left;
+}
+
+
+
+
+label.form-check-label {text-align: justify !important;}
+a.btn.btn-primary {background-color: #0563bb !important; border-color: #0563bb !important;}
+div.card.mb-4 {border:none; margin-bottom: 0px !important;}
+
+
+
+h1.main_name {color: #272829 !important}
+p.main_description_name {color: #272829 !important}
+
+
+

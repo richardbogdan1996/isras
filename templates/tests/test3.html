@@ -1,0 +1,561 @@
+{% extends 'layout.html' %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="card-body">
+            <div class="mt-3" id="">
+                <legend>Тест-3. Определение наличия и степени выраженности признаков РАС у детей раннего возраста </legend><br>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <form id="myForm" action="{% url 'test_3_creation' %}" method="POST">
+                    {% csrf_token %}
+
+
+
+                    <div class="step active">
+                        <div class="mb-3">
+                            <div class="mb-3" style="display:none;">
+                                <label for="test_identifier" class="form-label">test_number</label>
+                                <input type="text" name="test_identifier" class="form-control" id="test_identifier" aria-describedby="" value=3 readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="test_code" class="form-label">Код теста:</label>
+                                <p class="card-text">{{test_code}}</p>
+                                <input type="text" name="test_code" class="form-control" id="test_code" value="{{test_code}}" aria-describedby="testCode" required hidden="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="user_code" class="form-label">Код пользователя:</label>
+                                <p class="card-text">{{user.user_code}}</p>
+                                <input type="text" name="user_code" class="form-control" id="user_code" aria-describedby="" value="{{user.user_code}}" readonly required hidden="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="child_code" class="form-label">Код ребенка:</label>
+                                 <input type="text" name="child_code" class="form-control" id="child_code" aria-describedby="" value="{{child_code}}" readonly required >
+                            </div>
+                            <div class="mb-3">
+                                <label for="child_birthday" class="form-label">Дата рождения ребенка</label>
+                                <input type="date" name="child_birthday"  class="form-control" id="child_birthday" value="{{ child_birthday_date|date:'Y-m-d' }}" readonly required>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">1. Общая моторика, координация и контроль психомоторных функций</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_1_3" id="check_1_3_1" value="0" />
+                            <label class="form-check-label" for="check_1_3_1">
+                                Захватывает предметы успешно и с легкостью либо с незначительным ограничением скорости и аккуратности
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_1_3" id="check_1_3_2" value="1" />
+                            <label class="form-check-label" for="check_1_3_2">
+                                Захватывает большинство предметов с незначительным ограничением скорости и аккуратности.
+                                Определенные виды манипуляций недоступны или вызывают некоторые затруднения.
+                                Иногда проявляет двигательное беспокойство, несогласованность движений, не может усидеть, начинает бегать и карабкаться куда-то в состоянии усталости и психического напряжения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_1_3" id="check_1_3_3" value="2" />
+                            <label class="form-check-label" for="check_1_3_3">
+                                Удерживает предметы с трудом, нуждается в помощи со стороны при захватывании предметов.
+                                Манипуляции замедлены. Постоянно проявляет двигательное беспокойство, несогласованность движений, не может усидеть, начинает бегать и карабкаться куда-то в состоянии усталости и психического напряжения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_1_3" id="check_1_3_4" value="3" />
+                            <label class="form-check-label" for="check_1_3_4">
+                                Захватывает ограниченное число простых предметов с  посторонней помощью.
+                                Манипуляции с предметами ограничены.
+                                Постоянные приступы психомоторного возбуждения и/или психомоторного ступора</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_1_3" id="check_1_3_5" value="4" />
+                            <label class="form-check-label" for="check_1_3_5">
+                                Не захватывает предметы и имеет стойкое ограничение даже в простых движениях.
+                                Нуждается в постоянной помощи со стороны. Характерен кататонический ступор, который может сменяться кататоническим возбуждением
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">2. Моторные и сенсомоторные стереотипные акты</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_2_3" id="check_2_3_1" value="0" />
+                            <label class="form-check-label" for="check_2_3_1">
+                                Отсутствуют
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_2_3" id="check_2_3_2" value="1" />
+                            <label class="form-check-label" for="check_2_3_2">
+                                Стереотипные акты с частотой от одного до нескольких раз в неделю, которые появляются только в состоянии усталости и психического напряжения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_2_3" id="check_2_3_3" value="2" />
+                            <label class="form-check-label" for="check_2_3_3">
+                                Стереотипные акты (отчетливо выраженные) с частотой от нескольких раз в неделю до 2 раз в сутки
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_2_3" id="check_2_3_4" value="3" />
+                            <label class="form-check-label" for="check_2_3_4">
+                                Стереотипные акты (отчетливо выраженные) с частотой от 2 до 10 раз в сутки
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_2_3" id="check_2_3_5" value="4" />
+                            <label class="form-check-label" for="check_2_3_5">
+                                Стереотипные акты (отчетливо выраженные) с частотой более 10 раз в сутки
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">3. Нарушения эмоций</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_3_3" id="check_3_3_1" value="0" />
+                            <label class="form-check-label" for="check_3_3_1">
+                                Адекватные возрасту и ситуации эмоциональные ответы, наличие всего спектра эмоций.
+                                Приступы истерики, агрессии и аутоагрессии отсутствуют</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_3_3" id="check_3_3_2" value="1" />
+                            <label class="form-check-label" for="check_3_3_2">
+                                Тип и степень эмоционального ответа не соответствуют ситуации и возрастным нормам развития.
+                                Неадекватные эмоциональные реакции как правило возникают в новой обстановке, при смене привычной деятельности, в состоянии усталости.
+                                Приступы истерики, агрессии или аутоагрессии с частотой от 1 раза в 2 месяца до 2 раз в месяц</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_3_3" id="check_3_3_3" value="2" />
+                            <label class="form-check-label" for="check_3_3_3">
+                                Неадекватный эмоциональный ответ присутствует большую часть времени, даже в привычной обстановке.
+                                Эмоциональные реакции зачастую примитивные и плохо дифференцируемые. Приступы истерики, агрессии или аутоагрессии более 2 раз в месяц (до 4 раз в неделю)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_3_3" id="check_3_3_4" value="3" />
+                            <label class="form-check-label" for="check_3_3_4">
+                                Крайнее проявление неадекватных эмоциональных реакций в привычной и новой обстановке.
+                                Эмоциональные реакции всегда примитивные и плохо дифференцируемые.
+                                Приступы истерики, агрессии и аутоагрессии более 4 раз в неделю (до 5 раз в сутки)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_3_3" id="check_3_3_5" value="4" />
+                            <label class="form-check-label" for="check_3_3_5">
+                                Полное отсутствие адекватного эмоционального ответа.
+                                Неспособность подавлять аффект.
+                                Приступы истерики, агрессии или аутоагрессии более 5 раз в сутки
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">4. Функция зрительного контакта</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_4_3" id="check_4_3_1" value="0" />
+                            <label class="form-check-label" for="check_4_3_1">
+                                Ровный, спокойный, длительный зрительный контакт
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_4_3" id="check_4_3_2" value="1" />
+                            <label class="form-check-label" for="check_4_3_2">
+                                Кратковременный зрительный контакт
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_4_3" id="check_4_3_3" value="2" />
+                            <label class="form-check-label" for="check_4_3_3">
+                                Взгляд «мимо», «сквозь» объект
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_4_3" id="check_4_3_4" value="3" />
+                            <label class="form-check-label" for="check_4_3_4">
+                                Избегающий тип зрительного контакта
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_4_3" id="check_4_3_5" value="4" />
+                            <label class="form-check-label" for="check_4_3_5">
+                                Зрительный контакт отсутствует
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">5. Сенсорные функции</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_5_3" id="check_5_3_1" value="0" />
+                            <label class="form-check-label" for="check_5_3_1">
+                                Нет нарушений в сенсорной сфере
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_5_3" id="check_5_3_2" value="1" />
+                            <label class="form-check-label" for="check_5_3_2">
+                                Сверхчувствительность к консистенции пищи и определенным вкусам, запахам, прикосновениям, звукам, зрительным стимулам
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_5_3" id="check_5_3_3" value="2" />
+                            <label class="form-check-label" for="check_5_3_3">
+                                Наличие некоторых предпочтений в пище, запахах, прикосновениях, звуках, зрительных стимулах
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_5_3" id="check_5_3_4" value="3" />
+                            <label class="form-check-label" for="check_5_3_4">
+                                Наличие четких предпочтений в пище, запахах, прикосновениях, звуках, зрительных стимулах
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_5_3" id="check_5_3_5" value="4" />
+                            <label class="form-check-label" for="check_5_3_5">
+                                Полная непереносимость определенной пищи, запахов, прикосновений, звуков, зрительных стимулов; жесткие негативные ответы на эти раздражители
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">6. Разделение внимания и эмоций</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_6_3" id="check_6_3_1" value="0" />
+                            <label class="form-check-label" for="check_6_3_1">
+                                Ребенок стремится к общению со взрослым, откликается на обращение, пытается подражать действиям взрослого, радуется похвале, огорчается при порицании, демонстрирует радость и удовольствие от общения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_6_3" id="check_6_3_2" value="1" />
+                            <label class="form-check-label" for="check_6_3_2">
+                                Ребенок откликается на большинство обращений взрослого, но некоторые из них игнорирует.
+                                Эмоциональный компонент общения нестабильный
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_6_3" id="check_6_3_3" value="2" />
+                            <label class="form-check-label" for="check_6_3_3">
+                                Ребенок начинает инициировать общение со взрослым после одной или нескольких попыток с его стороны; откликается только на часть обращений взрослого.
+                                Проявляет умеренный интерес к взрослому и его действиям, периодически отвлекается от общения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_6_3" id="check_6_3_4" value="3" />
+                            <label class="form-check-label" for="check_6_3_4">
+                                Ребенок начинает инициировать общение со взрослым после его неоднократных попыток; редко откликается на обращения взрослого, большинство обращений игнорирует.
+                                Проявляет слабый интерес к взрослому и его действиям, часто отвлекается от общения
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_6_3" id="check_6_3_5" value="4" />
+                            <label class="form-check-label" for="check_6_3_5">
+                                Не проявляет чувствительности к воздействию взрослого.
+                                Отвлекается от общения и не обращает внимания на взрослого
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">7. Взаимодействие с животным миром</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_7_3" id="check_7_3_1" value="0" />
+                            <label class="form-check-label" for="check_7_3_1">
+                                Активное взаимодействие ребёнка и животного (подходит к животному, гладит, разговаривает, играет, кормит) с соблюдением границ взаимодействия
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_7_3" id="check_7_3_2" value="1" />
+                            <label class="form-check-label" for="check_7_3_2">
+                                Пассивное взаимодействие ребёнка и животного (сам к животному не подходит, не интересуется им, но если животное подойдет, то погладит его, поиграет с животным, покормит)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_7_3" id="check_7_3_3" value="2" />
+                            <label class="form-check-label" for="check_6_3_3">
+                                Равнодушное отношение ребенка к животному (не реагирует, если животное подойдет)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_7_3" id="check_7_3_4" value="3" />
+                            <label class="form-check-label" for="check_7_3_4">
+                                Необоснованное негативное отношение к животным, необоснованные страхи либо восприятие животных как неодушевленный предмет
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_7_3" id="check_7_3_5" value="4" />
+                            <label class="form-check-label" for="check_7_3_5">
+                                Не проявляет чувствительности к воздействию взрослого. Отвлекается от общения и не обращает внимания на взрослого
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">8. Привлечение другого лица к помощи</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_8_3" id="check_8_3_1" value="0" />
+                            <label class="form-check-label" for="check_8_3_1">
+                                Ребёнок с лёгкостью привлекает взрослого к помощи и принимает её
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_8_3" id="check_8_3_2" value="1" />
+                            <label class="form-check-label" for="check_8_3_2">
+                                Ребёнок непостоянно обращается за помощью и принимает её.
+                                Необходим длительный контакт со взрослым или другим ребёнком для привлечения помощи и ее принятия
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_8_3" id="check_8_3_3" value="2" />
+                            <label class="form-check-label" for="check_8_3_3">
+                                Ребёнок эпизодически обращается за помощью ко взрослому и только в рамках собственных интересов, принятие помощи ребёнком возможно при более длительном контакте со взрослым или другим ребёнком
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_8_3" id="check_8_3_4" value="3" />
+                            <label class="form-check-label" for="check_8_3_4">
+                                Ребёнок не обращается за помощью, эпизодически принимает помощь только в рамках собственных потребностей, не инициирует первым контакты со взрослым
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_8_3" id="check_8_3_5" value="4" />
+                            <label class="form-check-label" for="check_8_3_5">
+                                Ребёнок не принимает и не обращается за помощью ко взрослому
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">9. Присутствие указательного жеста пальцем как основа социального взаимодействия</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_9_3" id="check_9_3_1" value="0" />
+                            <label class="form-check-label" for="check_9_3_1">
+                                Спонтанное появление на первом году жизни, применение постоянно
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_9_3" id="check_9_3_2" value="1" />
+                            <label class="form-check-label" for="check_9_3_2">
+                                Появление после обучения на первом-втором году жизни, применение постоянно
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_9_3" id="check_9_3_3" value="2" />
+                            <label class="form-check-label" for="check_9_3_3">
+                                Появление после обучения на втором-третьем году жизни, применение непостоянно
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_9_3" id="check_9_3_4" value="3" />
+                            <label class="form-check-label" for="check_9_3_4">
+                                Появление после обучения на втором-третьем году жизни, применение в случае острой необходимости ребенка
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_9_3" id="check_9_3_5" value="4" />
+                            <label class="form-check-label" for="check_9_3_5">
+                                Отсутствие указательного жеста
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">10. Ведущая возрастая деятельнось, целенаправленное поведение, предрасположенности, подражание</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_10_3" id="check_10_3_1" value="0" />
+                            <label class="form-check-label" for="check_10_3_1">
+                                Ребёнок по собственной инициативе может подражать детям и взрослым, его легко научить каким-либо действиям, активно играет с игрушками, применяет бытовые предметы по назначению.
+                                Иногда неадекватно реагирует на требования, иногда отказывается брать на себя инициативу при взаимодействии с новыми людьми и в новых (незнакомых) для них ситуациях
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_10_3" id="check_10_3_2" value="1" />
+                            <label class="form-check-label" for="check_10_3_2">
+                                Подражание возможно после длительного обучения, имеются трудности в освоении новых бытовых предметов и незнакомых игр, нуждается в помощи взрослого для обучения и помощи в игре.
+                                Редко не берет на себя инициативу, отстраняясь от других людей и обстоятельств.
+                                Обычно не способен прилагать достаточные усилия в выполнении дел, которые ему не нравятся.
+                                Иногда проявляет нетерпение, сопровождающееся протестным поведением и чрезмерными эмоциональными реакциями.
+                                Указанные особенности хорошо компенсируются внешней мотивацией и понимающим поведением окружающих
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_10_3" id="check_10_3_3" value="2" />
+                            <label class="form-check-label" for="check_10_3_3">
+                                Для обучения ребёнка подражанию ребёнку необходима помощь и длительная сенсорная стимуляция.
+                                Ребенок использует по назначению ограниченный набор игровых предметов, а сюжетные линии в игре проигрывает с помощью взрослых.
+                                Обычно не берет на себя инициативу, отстраняясь от других людей и обстоятельств. Не способен прилагать достаточные усилия в выполнении дел, которые ему не нравятся.
+                                Постоянно проявляет нетерпение, сопровождающееся протестным поведением и чрезмерными эмоциональными реакциями.
+                                Указанные особенности недостаточно компенсируются внешней мотивацией и понимающим поведением окружающих
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_10_3" id="check_10_3_4" value="3" />
+                            <label class="form-check-label" for="check_10_3_4">
+                                Отсутствует спонтанное подражание, для обучения специальному подражанию требуется длительная организационная помощь со стороны взрослого.
+                                Не способен самостоятельно брать на себя инициативу.
+                                Ведет себя крайне инертно и пассивно, длительно занимаясь однотипной деятельностью или проявляет редко выраженное протестное поведение, агрессию, аутоагрессию, негативизм при нарушении привычного порядка деятельности.
+                                Протестное поведение, негативизм большую часть времени, слабо реагирует на внешнюю мотивацию, большую часть времени ребенок может играть исключительно с одним предметом
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_10_3" id="check_10_3_5" value="4" />
+                            <label class="form-check-label" for="check_10_3_5">
+                                Невозможность обучить ребёнка специальному подражанию.
+                                Практически полное отсутствие функционального использования бытовых и игровых предметов.
+                                Не реагирует на происходящее вокруг, попытки взаимодействия с ним.
+                                Могут отмечаться длительные застывания в однообразных, порой неестественных позах. Сопротивление любому воздействию. Практически полное отсутствие волевых актов.
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">11. Речевое развитие</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_11_3" id="check_11_3_1" value="0" />
+                            <label class="form-check-label" for="check_11_3_1">
+                                Развитие речи соответствует возрасту
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_11_3" id="check_11_3_2" value="1" />
+                            <label class="form-check-label" for="check_11_3_2">
+                                Отставание в формировании речи не более чем на 1-3 месяца
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_11_3" id="check_11_3_3" value="2" />
+                            <label class="form-check-label" for="check_11_3_3">
+                                Отставание в формировании речи на 4-6 месяцев
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_11_3" id="check_11_3_4" value="3" />
+                            <label class="form-check-label" for="check_11_3_4">
+                                Отставание в формировании речи на 7-12 месяцев
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_11_3" id="check_11_3_5" value="4" />
+                            <label class="form-check-label" for="check_11_3_5">
+                                Отставание в формировании речи более чем на 12 месяцев
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="step">
+                        <div class="mt-4 mb-4">
+                            <h5 class="card-title  mt-4 mt-sm-0">12. Самостоятельный прием пищи, контроль физиологических отправлений</h5>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_12_3" id="check_12_3_1" value="0" />
+                            <label class="form-check-label" for="check_12_3_1">
+                                Самостоятельный прием пищи на фоне развития аккуратности в процессе приема пищи.
+                                Контроль физиологических отправлений (в том числе ситуативный и во время сна)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_12_3" id="check_12_3_2" value="1" />
+                            <label class="form-check-label" for="check_12_3_2">
+                                Потребность в эпизодической дополнительной помощи со стороны другого лица при приеме пищи и отправлении
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_12_3" id="check_12_3_3" value="2" />
+                            <label class="form-check-label" for="check_12_3_3">
+                                Нуждаемость в регулярной дополнительной помощи при приеме пищи и отправлении
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_12_3" id="check_12_3_4" value="3" />
+                            <label class="form-check-label" for="check_12_3_4">
+                                Постоянная нуждаемость в помощи других лиц для приема пищи и отправлении
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="check_12_3" id="check_12_3_5" value="4" />
+                            <label class="form-check-label" for="check_12_3_5">
+                                Полное невозможность без помощи осуществить прием пищи и отправлении
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-footer" >
+                        <button type="button" class="btn btn-outline-primary" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)" >Далее</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<script src="/static/js/validate.form.js"></script>
+
+
+
+<script>
+  const dateInput = document.getElementById('child_birthday');
+  dateInput.addEventListener('click', () => {
+    dateInput.showPicker();
+  });
+</script>
+
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,275 @@
+{% extends 'layout.html' %}
+{% load django_tables2 %}
+
+{% block content %}
+
+<section class="profile" style="padding: 35px 0; !important">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+            <div class="container-fluid">
+                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false" aria-label="Toggle navigation" style="padding:0px;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="{% url 'profile' %}">Профиль</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'childs' %}">Дети</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'tests' %}">Результы тестов</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" aria-expanded="false">Отчеты</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" href="#">Отчет-1</a></li>
+                                <li><a class="dropdown-item" href="#">Отчет-2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" aria-expanded="false">Справочники</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <li><a class="dropdown-item" href="#">Oбщестатистический код предприятий и организаций (ОКПО)</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if request.user.is_superuser and request.user.is_staff %}
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">Администрирование</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Логи</a></li>
+                                <li><a class="dropdown-item" href="#">Пользователи</a></li>
+                                <li><a class="dropdown-item" href="#">Дети</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" aria-expanded="false">{{user.email}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                <li><a class="dropdown-item" href="{% url 'settings' %}">Настройки</a></li>
+                                <li><a class="dropdown-item" href="#">Помощь</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Выход</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="" id="content">
+                <h5 class="card-title  mt-4 mb-4">Дети</h5>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div class="toast  fade show" role="alert" aria-live="assertive" aria-atomic="true" id="toast-{{ forloop.counter }}">
+                        <div class="toast-header toast-primary">
+                            <strong class="me-auto">Сообщение</strong>
+                            <small>только что</small>
+                            <button type="button" class="btn-close" data-mdb-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body toast-primary">
+                            {{ message|safe }}
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                    var toastLiveExample = document.getElementById('toast-{{ forloop.counter }}');
+                    if (toastLiveExample) {var toast = new mdb.Toast(toastLiveExample, {
+                    stacking: true,
+                    autohide: true,
+                    delay: 10000
+                    });
+                    toast.show();
+                    }
+                    });
+                </script>
+                {% endfor %}
+                {% endif %}
+
+                <div class="mt-4 mb-3">
+                    <div class="dropdown">
+                        <button
+                                class="btn btn-primary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton"
+                                data-mdb-dropdown-init
+                                data-mdb-ripple-init
+                                aria-expanded="false"
+                        >
+                            Выберите из списка
+
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#reg_child">Регистрация ребенка в ИС РАС</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="mt-4 mb-3" >
+                    <form method="get">
+                        {% for field in filter.form %}
+                        <div class="input-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            <button type="submit" class="btn btn-primary">Поиск</button>
+                        </div>
+                        {% endfor %}
+                    </form>
+                </div>
+
+                <div class="mt-4 mb-3" id="">
+                    {% render_table result_child_table %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<div class="modal fade" id="reg_child" tabindex="-1" aria-labelledby="medicalInstitutionModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Регистрация ребенка в ИС РАС</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form method="post" action="{% url 'save_child' user.id %}">
+                    {% csrf_token %}
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="medical_institution" class="form-label">Закрепленное медицинское учреждение</label>
+                        </div>
+                        <div class="col-12">
+                            <select class="js-example-basic-single w-100 form-control" name="medical_institution" id="medical_institution" required style="width:100% !importnant;">
+                                <option value="" disabled hidden="" selected>Выберите из списка</option>
+                                {% for value, label in medical_institution_choices %}
+                                <option value="{{ value }}">{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3" hidden="">
+                        <label for="user_id" class="form-label">user_id</label>
+                        <input type="text" name="user_id" class="form-control" id="user_id" aria-describedby="" value={{user.id}} readonly required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="child_code" class="form-label">Идентификатор ребенка</label>
+                        <input type="text" name="child_code" class="form-control" id="child_code" aria-describedby="" value="{{child_code}}" readonly required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="child_birthday_date" class="form-label">Дата рождения ребенка</label>
+                        <input type="date" name="child_birthday_date" class="form-control" id="child_birthday_date" aria-describedby="" value="xxxx-xxxx-xxxx" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="child_gender" class="form-label">Пол</label>
+                        <select class="form-select" name="child_gender" id="child_gender" required>
+                            <option value="" selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="Мужской">Мужской</option>
+                            <option value="Женский">Женский</option>
+                        </select>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Зарегистрировать</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    const childBirthdayInput = document.getElementById('child_birthday_date');
+
+    function calculateDateRange() {
+    const today = new Date();
+    const minDate = new Date(today.getFullYear(), today.getMonth() - 36, today.getDate());
+    const maxDate = new Date(today.getFullYear(), today.getMonth() - 18, today.getDate());
+
+    childBirthdayInput.min = minDate.toISOString().split('T')[0];
+    childBirthdayInput.max = maxDate.toISOString().split('T')[0];
+
+    childBirthdayInput.addEventListener('input', function() {
+    const selectedDate = new Date(this.value);
+    const monthsDifference = (today.getFullYear() * 12 + today.getMonth()) - (selectedDate.getFullYear() * 12 + selectedDate.getMonth());
+
+    if (monthsDifference < 18 || monthsDifference > 36) {
+      this.setCustomValidity('Дата рождения ребенка должна быть от 18 до 36 месяцев');
+    } else {
+      this.setCustomValidity('');
+    }});}
+
+    window.addEventListener('DOMContentLoaded', calculateDateRange);
+
+</script>
+
+
+
+
+<script>
+  const dateInput = document.getElementById('child_birthday_date');
+
+  dateInput.addEventListener('click', () => {
+    dateInput.showPicker();
+  });
+</script>
+
+
+<script>
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+
+    const medicalInstitution = document.getElementById('medical_institution');
+
+    if (medicalInstitution.value === '0') {
+
+    event.preventDefault();
+
+    alert('Пожалуйста, выберите медицинское учреждение из списка.');
+  }
+});
+
+</script>
+
+
+
+
+
+<script>
+
+const nextLinks = document.querySelectorAll(".pagination .next a");
+const previousLinks = document.querySelectorAll(".pagination .previous a");
+
+nextLinks.forEach(link => {
+  link.textContent = "следующая";
+});
+
+previousLinks.forEach(link => {
+  link.textContent = "предыдущая";
+});
+
+
+</script>
+{% endblock %}

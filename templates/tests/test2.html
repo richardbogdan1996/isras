@@ -1,0 +1,371 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section>
+    <div class="container" >
+        <div class="card-body">
+            <div class="mt-3" id="">
+                <legend>Тест-2. На определение наличия и степени выраженности признаков РАС у детей раннего возраста </legend><br>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <form id="myForm" action="{% url 'test_2_creation' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="step active">
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="test_code" class="form-label">Код теста:</label>
+                            <h5 class="card-title mb-0">{{test_code}}</h5>
+                            <input type="text" name="test_code" class="form-control" id="test_code" value="{{test_code}}" aria-describedby="testCode" required hidden="">
+                        </div>
+
+                        <div class="mb-3" style="display:none;">
+                            <label for="test_identifier" class="form-label">test_number</label>
+                            <input type="text" name="test_identifier" class="form-control" id="test_identifier" aria-describedby="" value=2 readonly required>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="user_code" class="form-label">Код пользователя:</label>
+                            <h5 class="card-title mb-0">{{user.user_code}}</h5>
+                            <input type="text" name="user_code" class="form-control" id="user_code" aria-describedby="" value="{{user.user_code}}" readonly required hidden="">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="child_code" class="form-label">Код ребенка:</label>
+                             <input type="text" name="child_code" class="form-control" id="child_code" aria-describedby="" value="{{child_code}}" readonly required >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="child_birthday" class="form-label">Дата рождения ребенка</label>
+                            <input type="date" name="child_birthday"  class="form-control" id="child_birthday" value="{{ child_birthday_date|date:'Y-m-d' }}" width="40" readonly required >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                     <h5 class="card-title  mt-4 mt-sm-0">1. Замечали ли Вы у Вашего ребенка следующие нарушения в сенсорной (чувствительной) сфере ?</h5><br>
+                    <div class="mb-3">
+                        <label for="question_1_1_test_2" class="form-label"><b>1.1.</b> Необычность объекта внимания в новом пространстве (яркое пятно, деталь одежды, узор обоев и т. д. - ребенок сосредотачивается на этом объекте на долгое время и как будто не видит больше ничего вокруг)</label>
+                        <select class="form-select" name="question_1_1_test_2" id="question_1_1_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="question_1_2_test_2" class="form-label"><b>1.2.</b> Преимущественное использование взгляда «сквозь» объект и отсутствие прослеживания взглядом за предметом, что может выглядеть со стороны так, как будто ребенок слепой </label>
+                        <select class="form-select" name="question_1_2_test_2" id="question_1_2_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="question_1_3_test_2" class="form-label"><b>1.3.</b> Периодическая длительная сосредоточенность взгляда на незначимом объекте (световом пятне, участке блестящей поверхности, узоре обоев, ковра, мелькании теней) - ребенок как будто «зависает»</label>
+                        <select class="form-select" name="question_1_3_test_2" id="question_1_3_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="question_1_4_test_2" class="form-label"><b>1.4.</b> Постоянное стремление к рассматриванию ярких предметов, их движения, верчения, мелькания страниц либо постоянное стремление к своеобразным, как правило негромким звукам (шелест бумаги, шуршание целлофановых пакетов, скрип створок двери)</label>
+                        <select class="form-select" name="question_1_4_test_2" id="question_1_4_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="question_1_5_test_2" class="form-label"><b>1.5.</b> Отсутствие реакции на звуки (в т.ч. очень громкие, такие как шум дрели, звук автомобильной сигнализации) либо страхи отдельных звуков и отсутствие привыкания к ним</label>
+                        <select class="form-select" name="question_1_5_test_2" id="question_1_5_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_1_6_test_2" class="form-label"><b>1.6.</b> Получение чрезмерного удовольствия от необычных ощущений (разрывания и расслоения тканей или бумаги, пересыпания круп и т.д.) либо использование ощупывания и обнюхивания как основного способа исследования окружающих предметов</label>
+                        <select class="form-select" name="question_1_6_test_2" id="question_1_6_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_1_7_test_2" class="form-label"><b>1.7.</b> Наличие склонности к постоянным манипуляциям с собственным телом (напряжение тела, конечностей, удары себя по ушам, зажимание ушей, удары головой о стену и др.) </label>
+                        <select class="form-select" name="question_1_7_test_2" id="question_1_7_test_2" required >
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <p class="text-center mb-4"></p>
+                    <div class="mb-3">
+                        <h5 class="card-title mb-0">2. Замечали ли Вы у Вашего ребенка следующие нарушения в эмоциональной сфере ?</h5><br>
+                        <label for="question_2_1_test_2" class="form-label"><b>2.1.</b> Преобладание в общем эмоциональном фоне ребенка отрешенности, безразличия либо тревожности, напряженности </label>
+                        <select class="form-select" name="question_2_1_test_2" id="question_2_1_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_2_2_test_2" class="form-label"><b>2.2.</b> Длительное отсутствие «заражения» эмоцией другого человека (смех, плач, раздражение) либо отсутствие (снижение) поиска разделения эмоций (радости, интереса, огорчения) с другими людьми </label>
+                        <select class="form-select" name="question_2_2_test_2" id="question_2_2_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_2_3_test_2" class="form-label"><b>2.3.</b> «Яркие» поведенческие реакции (агрессия, самоагрессия, истерики) в повседневной жизни ребенка </label>
+                        <select class="form-select" name="question_2_3_test_2" id="question_2_3_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <p class="text-center mb-4"></p>
+                    <div class="mb-3">
+                        <h5 class="card-title mb-0">3. Замечали ли Вы у Вашего ребенка следующие варианты нарушений зрительного контакта ?</h5><br>
+                        <label for="question_3_1_test_2" class="form-label"><b>3.1.</b> Отсутствие фиксации взгляда на глазах человека (взгляд вверх, «мимо», «сквозь» либо кратковременный, неустойчивый зрительный контакт) ? </label>
+                        <select class="form-select" name="question_3_1_test_2" id="question_3_1_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_3_2_test_2" class="form-label"><b>3.2.</b> Беспричинное изменение зрительного контакта (неподвижный, застывший, испуганный взгляд и т.д.) </label>
+                        <select class="form-select" name="question_3_2_test_2" id="question_3_2_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <p class="text-center mb-4"></p>
+                    <div class="mb-3">
+                        <h5 class="card-title mb-0">4. Замечали ли Вы у Вашего ребенка следующие варианты нарушений в социальном взаимодействии ?</h5><br>
+                        <label for="question_4_1_test_2" class="form-label"><b>4.1.</b> Снижение или отсутствие потребности в матери, слабость реакции на ее уход, сопротивление при попытке взять ребенка на руки либо наоборот образование симбиотической связи с матерью и непереносимость ее отсутствия, даже кратковременного </label>
+                        <select class="form-select" name="question_4_1_test_2" id="question_4_1_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_4_2_test_2" class="form-label"><b>4.2.</b> Исключительно физическое (тактильное) общение с отношением к другому ребенку или взрослому как к неодушевленному предмету </label>
+                        <select class="form-select" name="question_4_2_test_2" id="question_4_2_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_4_3_test_2" class="form-label"><b>4.2.</b> «Механическое» использование руки взрослого для получения желаемого предмета </label>
+                        <select class="form-select" name="question_4_3_test_2" id="question_4_3_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="step">
+                    <p class="text-center mb-4"></p>
+                    <div class="mb-3">
+                        <h5 class="card-title mb-0">5. Замечали ли Вы у Вашего ребенка следующие варианты нарушений в развитии речи ?</h5><br>
+                        <label for="question_5_1_test_2" class="form-label"><b>5.1.</b> Снижение реакции (слабость, замедленность, избирательность) на словесные обращения; отсутствие отклика на имя; впечатление «псевдоглухоты» </label>
+                        <select class="form-select" name="question_5_1_test_2" id="question_5_1_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_5_2_test_2" class="form-label"><b>5.2.</b> Запаздывание или опережение появления первых слов, их необращенность к человеку, необычность, малоупотребимость </label>
+                        <select class="form-select" name="question_5_2_test_2" id="question_5_2_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_5_3_test_2" class="form-label"><b>5.3.</b> Особенности накопления пассивного и активного словарного запаса (слова, которые то появляются, то исчезают в речи ребенка; периодические регрессы и прорывы в развитии речи) </label>
+                        <select class="form-select" name="question_5_3_test_2" id="question_5_3_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <p class="text-center mb-4"></p>
+                    <div class="mb-3">
+                        <h5 class="card-title mb-0">6. Замечали ли Вы у Вашего ребенка следующие варианты нарушений в познавательной сфере и основной возрастной деятельности (игровой) ?</h5><br>
+                        <label for="question_6_1_test_2" class="form-label"><b>6.1.</b> Поведение с хаотическим перемещением в пространстве, бесцельная деятельность </label>
+                        <select class="form-select" name="question_6_1_test_2" id="question_6_1_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_6_2_test_2" class="form-label"><b>6.2.</b> Неспособность сосредотачиваться и понимать простые инструкции, что создает впечатление полного непонимания </label>
+                        <select class="form-select" name="question_6_2_test_2" id="question_6_2_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_6_3_test_2" class="form-label"><b>6.3.</b> Отсутствие интереса к назначению предметов, игрушек - преобладание интереса к форме, цвету, размеру над предмету в целом </label>
+                        <select class="form-select" name="question_6_3_test_2" id="question_6_3_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_6_4_test_2" class="form-label"><b>6.4.</b> Игнорирование игрушек или рассматривание их без стремления к игре. Приверженность только одной игрушке или типу игрушек (сортеры, пирамидки, машинки с крутящимися колесами) </label>
+                        <select class="form-select" name="question_6_4_test_2" id="question_6_4_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_6_5_test_2" class="form-label"><b>6.5.</b> Группировка игрушек и неигровых предметов по цвету, форме, размеру </label>
+                        <select class="form-select" name="question_6_5_test_2" id="question_6_5_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="question_6_6_test_2" class="form-label"><b>6.6.</b> Группировка игрушек и неигровых предметов по цвету, форме, размеру </label>
+                        <select class="form-select" name="question_6_6_test_2" id="question_6_6_test_2" required>
+                            <option selected disabled hidden="">Выберите из выпадающего списка</option>
+                            <option value="1">Да, часто (всегда)</option>
+                            <option value="2">Да, иногда</option>
+                            <option value="3">Да, редко (единичные случаи)</option>
+                            <option value="4">Нет, никогда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-footer" >
+                    <button type="button" class="btn btn-outline-primary" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextPrev(1)" >Далее</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const dateInput = document.getElementById('child_birthday');
+
+  dateInput.addEventListener('click', () => {
+    dateInput.showPicker();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
